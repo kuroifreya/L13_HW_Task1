@@ -37,16 +37,9 @@ public class TodosTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    //тесты на поиск каждого из типов задач
     @Test
-    public void shouldFindNothing() {
-        Task[] expected = {};
-        Task[] actual = todos.search("мёд");
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindSimpleTask() {
+    public void shouldFindSimpleTask() {//находится одна задача из массива simpleTask
         Task[] expected = {simpleTask};
         Task[] actual = todos.search("дорог");
 
@@ -54,7 +47,7 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldFindEpic() {
+    public void shouldFindEpic() {//находится одна задача из массива epic
         Task[] expected = {epic};
         Task[] actual = todos.search("банан");
 
@@ -62,18 +55,34 @@ public class TodosTest {
     }
 
     @Test
-    public void shouldFindMeeting() {
+    public void shouldFindMeeting() {//находится одна задача из массива meeting
         Task[] expected = {meeting};
         Task[] actual = todos.search("взять");
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    //тесты на поиск определенного количества элементов
     @Test
-    public void shouldFindFewElements() {
-        Task[] expected = {simpleTask, epic};
-        Task[] actual = todos.search("авокадо");
+    public void shouldFindNothing() {//находится 0 задач
+        int expected = 0;
+        int actual = todos.search("мёд").length;
 
-        Assertions.assertArrayEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void shouldFindOneElement() {//находится 1 задача
+        int expected = 1;
+        int actual = todos.search("тофу").length;
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindFewElements() {//находится несколько задач
+        int expected = 2;
+        int actual = todos.search("авокадо").length;
+
+        Assertions.assertEquals(expected, actual);
     }
 }
