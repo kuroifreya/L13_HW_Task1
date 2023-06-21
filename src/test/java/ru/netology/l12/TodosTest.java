@@ -65,24 +65,33 @@ public class TodosTest {
     //тесты на поиск определенного количества элементов
     @Test
     public void shouldFindNothing() {//находится 0 задач
-        int expected = 0;
-        int actual = todos.search("мёд").length;
+        Task[] expected = {};
+        Task[] actual = todos.search("мёд");
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldNotFindStart() {//не ищет инфо из поля Start класса Meeting
+        Task[] expected = {};
+        Task[] actual = todos.search("Сегодня");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
     @Test
     public void shouldFindOneElement() {//находится 1 задача
-        int expected = 1;
-        int actual = todos.search("тофу").length;
+        Task[] expected = {epic};
+        Task[] actual = todos.search("тофу");
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldFindFewElements() {//находится несколько задач
-        int expected = 2;
-        int actual = todos.search("авокадо").length;
+        Task[] expected = {simpleTask, epic};
+        Task[] actual = todos.search("авокадо");
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 }
